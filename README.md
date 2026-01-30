@@ -1,86 +1,71 @@
-# Image to Excel Converter 📸➡️📊
+# Image to Excel Converter
 
-A simple yet powerful Flask web application that converts images of financial documents (like credit card statements or receipts) into organized Excel spreadsheets.
+A Flask web application that converts images of financial documents into Excel spreadsheets using OCR (Optical Character Recognition).
 
-It uses Optical Character Recognition (OCR) to read text from images, intelligently parses the data into columns (Dates, Merchants, Amounts, etc.), and exports it as a downloadable `.xlsx` file.
+## Features
 
-## ✨ Features
+- **Image Preprocessing**: Automatically cleans and sharpens images for better text recognition
+- **Financial Data Parsing**: Extracts dates, merchants, amounts, and other data from credit card statements and receipts
+- **Excel Export**: Generates formatted Excel files with auto-adjusted column widths
+- **Web Interface**: Simple drag-and-drop file upload
 
-*   **Smart Image Preprocessing:** Automatically cleans, resizes, and sharpens images to improve text recognition accuracy.
-*   **Financial Data Parsing:**
-    *   Specialized parser for Credit Card Statements (extracts Transaction Date, Posting Date, Merchant, Location, and Amount).
-    *   Generic parser fallback for other financial documents.
-*   **Excel Export:** Generates formatted Excel files with auto-adjusted column widths.
-*   **Simple Web Interface:** Easy drag-and-drop or file selection upload.
+## Prerequisites
 
-## 🛠️ Prerequisites
+1. **Python 3.8 or higher**
+2. **Tesseract OCR Engine**
 
-Before running the app, you need to have the following installed on your system:
+Install Tesseract:
+- **Ubuntu/Debian:** `sudo apt-get install tesseract-ocr`
+- **macOS:** `brew install tesseract`
+- **Windows:** Download from [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki) and add to System Environment Variables
 
-1.  **Python 3.8+**
-2.  **Tesseract OCR Engine** (Required for the text recognition to work)
+## Installation
 
-    *   **Ubuntu/Debian:**
-        ```bash
-        sudo apt-get install tesseract-ocr
-        ```
-    *   **macOS (Homebrew):**
-        ```bash
-        brew install tesseract
-        ```
-    *   **Windows:**
-        Download the installer from [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki) and add the installation path to your System Environment Variables.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd imgtoexcel
+   ```
 
-## 🚀 Installation
+2. Create a virtual environment (optional):
+   ```bash
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
 
-1.  **Clone the repository** (or download the files):
-    ```bash
-    git clone <repository-url>
-    cd imgtoexcel
-    ```
+   # Linux/macOS
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-2.  **Create a virtual environment (Optional but recommended):**
-    ```bash
-    # Windows
-    python -m venv venv
-    venv\Scripts\activate
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-    # Linux/macOS
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+## Usage
 
-3.  **Install Python dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+1. Start the Flask server:
+   ```bash
+   python app.py
+   ```
 
-## 🏃‍♂️ How to Run
+2. Open your browser and go to: `http://localhost:5000`
 
-1.  **Start the Flask server:**
-    ```bash
-    python app.py
-    ```
+3. Upload an image (JPG or PNG) to convert it to Excel
 
-2.  **Open the application:**
-    Open your web browser and go to: `http://localhost:5000`
+## Project Structure
 
-3.  **Convert an image:**
-    *   Click the upload button to select an image (JPG, PNG).
-    *   The app will process the image and automatically download the converted Excel file.
+- `app.py`: Main Flask application with OCR logic and routes
+- `templates/index.html`: Frontend interface
+- `requirements.txt`: Python dependencies
+- `test_parser.py`: Optional testing script for parsing logic
 
-## 📂 Project Structure
+## Important Notes
 
-*   `app.py`: The main Flask application containing the OCR logic, parsing algorithms, and routes.
-*   `templates/index.html`: The frontend HTML interface.
-*   `requirements.txt`: List of Python libraries required.
-*   `test_parser.py`: (Optional) Script for testing the parsing logic on local images.
+OCR accuracy depends on:
+- Image quality (high resolution works best)
+- Lighting (even lighting without shadows)
+- Font type (standard printed fonts work better than handwriting)
 
-## ⚠️ Note on Accuracy
-
-OCR technology is not perfect. The accuracy depends heavily on:
-*   **Image Quality:** High resolution and clear scans work best.
-*   **Lighting:** Even lighting without shadows is ideal.
-*   **Font:** Standard, printed fonts are recognized much better than handwriting.
-
-Always review the generated Excel file for potential errors!
+Always review the generated Excel file for potential errors.
